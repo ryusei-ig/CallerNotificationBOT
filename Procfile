@@ -1,1 +1,1 @@
-web: node CallNotificationBOT.js
+worker: node CallNotificationBOT.js
