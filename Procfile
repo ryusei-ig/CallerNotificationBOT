@@ -1,1 +1,1 @@
-worker: node src\CallNotificationBOT.js
+worker: node src/CallNotificationBOT.js
