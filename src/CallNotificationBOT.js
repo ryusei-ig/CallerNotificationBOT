@@ -24,7 +24,7 @@ function formatDate(date, format) {
 
 //仕様上日本時間を指定しないと世界標準時になるため9時間ずらす
   var timezoneoffset = -9 
-  var fakeUTC = new Date(date.now() - (timezoneoffset * 60 - new Date().getTimezoneOffset()) * 60000);
+  var fakeUTC = new Date(date.getTime() - (timezoneoffset * 60 - new Date().getTimezoneOffset()) * 60000);
 
   format = format.replace(/YYYY/g, fakeUTC.getFullYear());
   format = format.replace(/MM/g, ('0' + (fakeUTC.getMonth() + 1)).slice(-2));
