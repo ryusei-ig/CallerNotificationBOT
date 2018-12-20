@@ -26,12 +26,12 @@ function formatDate(date, format) {
   var timezoneoffset = -9 
   var fakeUTC = new Date(date.now() - (timezoneoffset * 60 - new Date().getTimezoneOffset()) * 60000);
 
-  format = fakeUTC.replace(/YYYY/g, date.getFullYear());
-  format = fakeUTC.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
-  format = fakeUTC.replace(/DD/g, ('0' + date.getDate()).slice(-2));
-  format = fakeUTC.replace(/hh/g, ('0' + date.getHours()).slice(-2));
-  format = fakeUTC.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
-  format = fakeUTC.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
+  format = format.replace(/YYYY/g, fakeUTC.getFullYear());
+  format = format.replace(/MM/g, ('0' + (fakeUTC.getMonth() + 1)).slice(-2));
+  format = format.replace(/DD/g, ('0' + fakeUTC.getDate()).slice(-2));
+  format = format.replace(/hh/g, ('0' + fakeUTC.getHours()).slice(-2));
+  format = format.replace(/mm/g, ('0' + fakeUTC.getMinutes()).slice(-2));
+  format = format.replace(/ss/g, ('0' + fakeUTC.getSeconds()).slice(-2));
 
   return format;
 }
