@@ -10,7 +10,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node src/CallNotificationBOT.js"
+    "start": "node CallNotificationBOT.js"
   },
   "engines": {
     "node": "6.11.1"
