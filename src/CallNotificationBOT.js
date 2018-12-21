@@ -62,9 +62,11 @@ bot.on("voiceChannelJoin", (member, newChannel) => {
     console.log("[1st]%s が チャンネル %s に入室しました。", member.username, newChannel.name); 
     
     //メッセージ作成・チャット出力
-    channel.createMessage("(通話を始めました。\n開始時間:" 
-      + formatDate(new Date(), 'YYYY/MM/DD hh:mm:ss') + 
-      "\n始めた人：["+ firstCaller + "]さん");
+    channel.createMessage({
+      content:"@everyone 通話を始めました。\n開始時間:" 
+        + formatDate(new Date(), 'YYYY/MM/DD hh:mm:ss') + 
+        "\n始めた人：["+ firstCaller + "]さん",
+      disableEveryone:false});
     vc_connected = Boolean(true);
     console.log(vc_connected);
     //初回のみ入室カウントを2にする。
@@ -85,13 +87,12 @@ bot.on("voiceChannelLeave", (member, oldChannel) => {
   const channel = oldChannel.guild.channels.find((channel) => channel.name === CHANNELNAME);
 
   //チャネルから全員の接続が無くなったら通知する。
-  
   //メッセージ作成・チャット出力
   if (userCounter == 1){
     console.log("誰もいないよ");
-    channel.createMessage("(テスト中)通話が終わったっぽいです。\n終了時間:"
+    channel.createMessage("通話が終わりました。\n終了時間:"
        + formatDate(new Date(), 'YYYY/MM/DD hh:mm:ss')
-       + "\n----------参加者一覧----------\n" + vcMember ); 
+       + "\n----------参加者一覧----------\n" + vcMember +"\n------------------------------" ); 
     vc_connected = Boolean(false);
 
     //初期化
