@@ -19,6 +19,13 @@ var bot = new Eris(config.TOKEN);
 //通話中の人数カウント用変数
 var userCounter = 0;
 
+//通話をかけた人
+var firstCaller =　"";
+
+//通話に参加した人
+var vcGuestname = "";
+var vcMember = "";
+
 //ログ用日付フォーマット作成関数
 function formatDate(date, format) {
 
@@ -49,13 +56,22 @@ bot.on("voiceChannelJoin", (member, newChannel) => {
   console.log("%s が チャンネル %s に入室しました。",  member.username, newChannel.name); 
   //誰かが最初に入った時を初回として、1人めに入った人を引っ掛けて通知する。
   if(vc_connected == false){
+    if(!member.nick){ firstCaller = member.username } else{ firstCaller = member.nick };
+    vcMember = firstCaller + "\n";
+
     console.log("[1st]%s が チャンネル %s に入室しました。", member.username, newChannel.name); 
-    channel.createMessage("(テスト中)通話が始まったっぽいです。開始時間:" + formatDate(new Date(), 'YYYY/MM/DD hh:mm:ss') );
+    
+    //メッセージ作成・チャット出力
+    channel.createMessage("(通話を始めました。\n開始時間:" 
+      + formatDate(new Date(), 'YYYY/MM/DD hh:mm:ss') + 
+      "\n始めた人：["+ firstCaller + "]さん");
     vc_connected = Boolean(true);
     console.log(vc_connected);
     //初回のみ入室カウントを2にする。
     userCounter += 2;
   } else{
+    if(!member.nick){ vcGuestname = member.username } else{ vcGuestname = member.nick };
+    if(!vcMember.match(vcGuestname)) { vcMember += vcGuestname + "\n"; }
     userCounter += 1;
   }
 });
@@ -69,12 +85,18 @@ bot.on("voiceChannelLeave", (member, oldChannel) => {
   const channel = oldChannel.guild.channels.find((channel) => channel.name === CHANNELNAME);
 
   //チャネルから全員の接続が無くなったら通知する。
-  //if (!oldChannel.voiceMembers.find((member) => member.id == null)){
+  
+  //メッセージ作成・チャット出力
   if (userCounter == 1){
     console.log("誰もいないよ");
-    channel.createMessage("(テスト中)通話が終わったっぽいです。終了時間:" + formatDate(new Date(), 'YYYY/MM/DD hh:mm:ss') ); 
+    channel.createMessage("(テスト中)通話が終わったっぽいです。\n終了時間:"
+       + formatDate(new Date(), 'YYYY/MM/DD hh:mm:ss')
+       + "\n----------参加者一覧----------\n" + vcMember ); 
     vc_connected = Boolean(false);
+
+    //初期化
     userCounter = 0;
+    vcMember = "";
   }
 });
 
