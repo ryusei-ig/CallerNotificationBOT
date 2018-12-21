@@ -9,7 +9,7 @@ const Eris = require("eris");
 const config = require("../config.json");
 
 //通知用チャンネル
-const CHANNELNAME = 'テスト';
+const CHANNELNAME = '通話開始・終了ログ';
 
 //通話開始フラグ
 var vc_connected = new Boolean(false);
