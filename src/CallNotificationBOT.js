@@ -190,7 +190,6 @@ bot.on("voiceChannelSwitch", (member, newChannel, oldChannel) => {
 
 //メッセージに対しての処理
 bot.on("messageCreate",(message) => {
-  console.log("fire:" + message.clearContent);
 
   //自分の発言に反応しないようにBOT以外の発言をイベントとして受け取る
   if(message.member.bot) return
@@ -204,7 +203,6 @@ bot.on("messageCreate",(message) => {
     var wins = parseInt(totalMasterPoint) / 100;
     var loses = (parseInt(totalMasterPoint) - parseInt(masterPoint)) / 100;
 
-    console.log( parseInt(totalMasterPoint) + "," + parseInt(masterPoint));
     //簡易勝率計算
     var winrate = wins / (wins + loses) * 100;
     message.channel.createMessage(message.member.mention +"勝率:" + winrate + "%");
