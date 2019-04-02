@@ -202,9 +202,9 @@ bot.on("messageCreate",(message) => {
     var masterPoint = message.content.replace("勝率計算:","").replace(/累計\d{1,6}/,"").replace("現在","");
 
     var wins = parseInt(totalMasterPoint) / 100;
-    var loses = parseInt(totalMasterPoint) - parseInt(masterPoint) / 100;
+    var loses = (parseInt(totalMasterPoint) - parseInt(masterPoint)) / 100;
 
-    console.log( totalMasterPoint + "," + masterPoint);
+    console.log( parseInt(totalMasterPoint) + "," + parseInt(masterPoint));
     //簡易勝率計算
     var winrate = wins / (wins + loses);
     message.channel.createMessage(message.member.mention +"勝率:" + winrate + "%");
