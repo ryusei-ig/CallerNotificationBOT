@@ -1,0 +1,19 @@
+﻿{
+    "channelLists":[
+        {
+            "name": "テスト用チャンネル",
+            "voiceChannelId": "415902972308881421",
+            "notificationChannelId": "474245529438519296"
+        },
+        {
+            "name": "victor窓",
+            "voiceChannelId": "525202666041769984",
+            "notificationChannelId": "525261139655786498"
+        },
+        {
+            "name": "テスト用チャンネル2",
+            "voiceChannelId": "537977968673423364",
+            "notificationChannelId": "537977968673423362"
+        }
+    ]
+}
