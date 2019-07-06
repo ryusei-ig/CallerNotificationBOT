@@ -81,8 +81,31 @@ class channelData {
   set VcMember(x){
     this.vcMember = x;
   }
+}
+
+  //ログ用日付フォーマット作成メソッド
+  function formatDate(date, format) {
+
+    //仕様上日本時間を指定しないと世界標準時になるため9時間ずらす
+      var timezoneoffset = -9 
+      var fakeUTC = new Date(date.getTime() - (timezoneoffset * 60 - new Date().getTimezoneOffset()) * 60000);
+    
+      format = format.replace(/YYYY/g, fakeUTC.getFullYear());
+      format = format.replace(/MM/g, ('0' + (fakeUTC.getMonth() + 1)).slice(-2));
+      format = format.replace(/DD/g, ('0' + fakeUTC.getDate()).slice(-2));
+      format = format.replace(/hh/g, ('0' + fakeUTC.getHours()).slice(-2));
+      format = format.replace(/mm/g, ('0' + fakeUTC.getMinutes()).slice(-2));
+      format = format.replace(/ss/g, ('0' + fakeUTC.getSeconds()).slice(-2));
+    
+      return format;
+    };
 
 
+// for(var i = 0; i <= Object.keys(ChannelLists).length; i++) {
+//   var result = Object.keys(ChannelLists.channelLists[i]).filter( (key) => { 
+//     return ChannelLists.channelLists[i][key] === 'victor窓'
+//   });
+// }
 
 let channeldata = new channelData();
 
