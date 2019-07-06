@@ -81,7 +81,7 @@ class channelData {
   set VcMember(x){
     this.vcMember = x;
   }
-}
+
 
 
 let channeldata = new channelData();
