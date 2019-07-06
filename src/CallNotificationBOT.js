@@ -83,29 +83,6 @@ class channelData {
   }
 }
 
-  //ログ用日付フォーマット作成メソッド
-  function formatDate(date, format) {
-
-    //仕様上日本時間を指定しないと世界標準時になるため9時間ずらす
-      var timezoneoffset = -9 
-      var fakeUTC = new Date(date.getTime() - (timezoneoffset * 60 - new Date().getTimezoneOffset()) * 60000);
-    
-      format = format.replace(/YYYY/g, fakeUTC.getFullYear());
-      format = format.replace(/MM/g, ('0' + (fakeUTC.getMonth() + 1)).slice(-2));
-      format = format.replace(/DD/g, ('0' + fakeUTC.getDate()).slice(-2));
-      format = format.replace(/hh/g, ('0' + fakeUTC.getHours()).slice(-2));
-      format = format.replace(/mm/g, ('0' + fakeUTC.getMinutes()).slice(-2));
-      format = format.replace(/ss/g, ('0' + fakeUTC.getSeconds()).slice(-2));
-    
-      return format;
-    };
-
-
-// for(var i = 0; i <= Object.keys(ChannelLists).length; i++) {
-//   var result = Object.keys(ChannelLists.channelLists[i]).filter( (key) => { 
-//     return ChannelLists.channelLists[i][key] === 'victor窓'
-//   });
-// }
 
 let channeldata = new channelData();
 
@@ -193,20 +170,6 @@ bot.on("messageCreate",(message) => {
 
   //自分の発言に反応しないようにBOT以外の発言をイベントとして受け取る
   if(message.member.bot) return
-
-  //勝率計算
-  var winrateRE = /勝率計算:累計\d{1,6}現在\d{1,6}$/;
-  if(message.content.match(winrateRE)){
-    var totalMasterPoint = message.content.replace("勝率計算:","").replace("累計","").replace(/現在\d{1,6}/,"");
-    var masterPoint = message.content.replace("勝率計算:","").replace(/累計\d{1,6}/,"").replace("現在","");
-
-    var wins = parseInt(totalMasterPoint) / 100;
-    var loses = (parseInt(totalMasterPoint) - parseInt(masterPoint)) / 100;
-
-    //簡易勝率計算
-    var winrate = wins / (wins + loses) * 100;
-    message.channel.createMessage(message.member.mention +"勝率:" + winrate + "%");
-  }
 
 });
 
