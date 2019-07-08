@@ -194,6 +194,10 @@ bot.on("messageCreate",(message) => {
   //自分の発言に反応しないようにBOT以外の発言をイベントとして受け取る
   if(message.member.bot) return
 
+  //HELPページにリダイレクト
+  if(message.content.match("!help")){
+    message.channel.createMessage("index.html");
+  }
 });
 
 //セッションにログイン
